@@ -1,102 +1,102 @@
-**概述**
+**Overview**
 
-DOAF 是用于创建基于Azure云的企业应用的完整框架！遵循最佳实践和约定，为你提供强大的Azure云原生集成能力。
+DOAF is a complete framework for creating Azure cloud-based enterprise applications! Follow best practices and conventions to provide you with powerful Azure cloud-native integration capabilities.
 
-**开始**
+**start**
 
-[快速入门](url)是一个由单部分组成的快速入门教程。如果您想快速启动 DOAF，请从本教程开始。
+[Quickstart](url) is a one-part quickstart tutorial. If you want a quick start to DOAF, start with this tutorial.
 
-**项目框架结构**
+**Project Framework**
 
-DOAF 的分层结合了领域的概念。
+The layers of DOAF combine the concept of domains.
 
-框架分为 4 个部分：
+The framework is divided into 4 parts:
 
-    1、平台：
-        存放位置：00.Platform/Packages
-        包含框架基础依赖包和可选功能包。自由搭配选择这些包可实现包括轻松对接Azure资源、对接常用中间件、消息推送、流水号生成等功能
+    1. Platform:
+        Storage location: 00.Platform/Packages
+        Contains framework basic dependency packages and optional feature packages. These packages can be freely matched and selected to realize functions including easy connection to Azure resources, connection to common middleware, message push, serial number generation, etc.
 
-    2、模块（领域）：
-        存放位置：01.Modules
-        包含：
-        框架内置模块：基本的项目业务实现,包括用户、组织、系统配置
-        业务模块：项目的业务实现
+    2. Modules (fields):
+        Storage location: 01.Modules
+        Include:
+        Framework built-in modules: basic project business implementation, including user, organization, system configuration
+        Business module: business realization of the project
 
-    3、项目入口
-       Main函数的所在位置。项目以什么形式发布，如何Hosing，配置文件存放等都在这一层处理
+    3. Project entry
+       The location of the Main function. In what form the project is released, how to Hosing, and the storage of configuration files are all handled at this layer.
 
-    4、单元测试部分：暂未完善
+    4. Unit testing part: not yet perfect
 
-**平台**
+**platform**
 
-    Medalsoft.Core 为核心依赖包，开发DOAF项目必须引用。包含绝大部分公共接口（interface）和实体（entity），此外还存放了少量基础的工具代码。
+    Medalsoft.Core is the core dependency package, which must be referenced when developing DOAF projects. It contains most of the public interfaces and entities, and also stores a small amount of basic tool code.
 
-    引入扩展库的命名规范为：MedalSoft.[第三方库名称]，示例：第三方库名称为：CsRedis，扩展库名称为：Medalsoft.CsRedis
+    The naming convention of the imported extension library is: MedalSoft.[name of the third-party library], for example: the name of the third-party library is: CsRedis, and the name of the extension library is: Medalsoft.CsRedis
 
-[日志](url)
+[log](url)
 
-    日志模块暂时将serilog作为唯一日志扩展，更多关于日志扩展信息请移步至框架规划
-    现有项目：
+    The log module temporarily uses serilog as the only log extension. For more information about log extensions, please go to Framework Planning
+    Existing projects:
     Medalsoft.Log
 
-[数据访问](url)
+[data access](url)
 
-    现在绝大部分项目都是基于某个ORM（关系映射）进行开发，提供了对应的仓储接口，开发者可以自行扩展。DOAF 使用SqlSugar作为默认ORM
-    现有项目：
+    At present, most projects are developed based on an ORM (relational mapping), which provides a corresponding repository interface, and developers can expand it by themselves. DOAF uses SqlSugar as default ORM
+    Existing projects:
         Medalsoft.SqlSugar
         Medalsoft.Dapper
 
-[定时任务和后台任务](url)：
+[Scheduled tasks and background tasks] (url):
 
-由于定时任务和后台任务，.net core 3.1 之后已经有提供接口 BackgroundService ，DOAF 实现了一种相对简洁的后台服务。
+Due to timed tasks and background tasks, the interface BackgroundService has been provided since .net core 3.1, and DOAF implements a relatively simple background service.
 
         Medalsoft.Hangfire
 
-[缓存](url)：
+[cache](url):
 
-    Medalsoft.Cache 为缓存基础库，为第三方库接入DOAF提供扩展标准，默认使用 MemoryCache。
-        已接入的缓存扩展：
+    Medalsoft.Cache is the basic cache library and provides extended standards for third-party libraries to access DOAF. MemoryCache is used by default.
+        Accessed cache extensions:
         Medalsoft.CsRedis
         Medalsoft.FreeRedis
 
-[Azure](url)：
+[Azure](url):
 
-    现有以下二次封装库：
+    The following secondary packaging libraries are available:
         Medalsoft.AzureADB2C
         Medalsoft.AzureStorage
         Medalsoft.SharePointCsom
         Medalsoft.GraphApi
 
-[业务相关扩展](url)
+[Business related extension](url)
 
-    为了更好的支持项目开发，避免一些不必要的重复工作，将部分高度重复可用，且有一定扩展需求的功能进行了扩展封装，这些库里面有部分是允许或必须自行实现接口（interface），以保证最贴近项目需求。
-    现有项目：
+    In order to better support project development and avoid some unnecessary duplication of work, some functions that are highly repeatable and available and have certain expansion requirements have been expanded and encapsulated. Some of these libraries are allowed or must implement their own interfaces (interface), In order to ensure that it is closest to the project needs.
+    Existing projects:
         Medalsoft.SerialNumber
         Medalsoft.Page
         Medalsoft.MessageCore
         Medalsoft.Document
 
-[开发体验相关扩展](url)
+[Development experience related extensions](url)
 
-    为了更好的支持项目开发体验，避免一些不必要的重复工作。将引入一些提高工作效率以及沟通的工具。
-    现有项目：
+    In order to better support the project development experience, avoid unnecessary duplication of work. Some tools will be introduced to improve productivity as well as communication.
+    Existing projects:
         Medalsoft.Swagger
 
-**模块**
+**Module**
 
-[项目模块](url)
+[project module](url)
     
-    项目与项目之间有部分相似，甚至相同的功能，但又由于每个项目都有自定义的可能，并且会进行模块间的交互。MedalSoft Framework 中将这部分内容分为基础的4个模块：
+    There are some similarities between projects and even the same functions, but because each project has the possibility of customization and interaction between modules. This part of the MedalSoft Framework is divided into four basic modules:
         Medalsoft.Common
         Medalsoft.ProjectCore
         Medalsoft.ServiceContract
         Medalsoft.System
 
-**入口**
+**Entrance**
 
-[项目模块](url)
+[project module](url)
     
-    每个项目有不同的需求以及技术难度和工作量，为了更好的适配相应项目的需求，DOAF 中将这部分内容分为基础的3个项目：
-        Medalsoft.FullSample：适合高度自定义的项目
-        Medalsoft.MinimalAPI：适合微小型项目（只需要几个接口或者只是做为中转程序）
-        Medalsoft.Sample：大部分项目
+    Each project has different requirements, technical difficulty and workload. In order to better adapt to the needs of the corresponding project, DOAF divides this part of the content into three basic projects:
+        Medalsoft.FullSample: suitable for highly customized projects
+        Medalsoft.MinimalAPI: suitable for small and small projects (only need a few interfaces or just as a transfer program)
+        Medalsoft.Sample: Most items
